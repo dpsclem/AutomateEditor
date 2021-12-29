@@ -1,42 +1,37 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#define MAX_LINE_LENGTH 80
-
-char** readFileLines(char* path);
-
-
+#include "main.h"
 
 int main() {
-   readFileLines("Langage.txt");
-   return 0;
+    printf("%s", GetWordMirror("abcdef"));
+    return 0;
 }
 
+char* ConcatWords(char *firstWord, char *secondWord){
+    char *result = malloc(strlen(firstWord) + strlen(secondWord) + 1);
 
-char** readFileLines(char* path) {
+    strcpy(result, firstWord);
+    strcat(result, secondWord);
 
-    char line[MAX_LINE_LENGTH] = {0};
-    unsigned int line_count = 0;
-    
-    
-    /* Open file */
-    FILE *file = fopen(path, "r");
-    
-    if (!file)
+    return result;
+}
+
+bool IsWordEmpty(char *wordToCheck) {
+    if (strlen(wordToCheck) == 0)
     {
-        perror(path);
+        return true;
+    }
+    else 
+    {
+        return false;
+    }
+}
+
+char *GetWordMirror(char *initialWord) {
+    int initialWordLen = strlen(initialWord);
+    char *mirroredWord = malloc(initialWordLen + 1);
+    for (int i = initialWordLen; i >= 0; i--)
+    {
+        mirroredWord[initialWordLen-i] = initialWord[i-1];
     }
     
-    while (fgets(line, MAX_LINE_LENGTH, file))
-    {
-        printf("line[%06d]: %s", ++line_count, line);
-        
-        if (line[strlen(line) - 1] != '\n')
-            printf("\n");
-    }
-    
-    if (fclose(file))
-    {
-        perror(path);
-    }
+    return mirroredWord;
 }
