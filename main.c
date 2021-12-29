@@ -1,6 +1,9 @@
 #include "main.h"
 
 int main() {
+    printf("%d", IsStringProducingFinishedWord("a*bb"));
+    printf("\n");
+    printf("%d", IsStringProducingFinishedWord("aabcj"));
     return 0;
 }
 
@@ -24,7 +27,7 @@ bool IsWordEmpty(char *wordToCheck) {
     }
 }
 
-char *GetWordMirror(char *initialWord) {
+char* GetWordMirror(char *initialWord) {
     int initialWordLen = strlen(initialWord);
     char *mirroredWord = malloc(initialWordLen + 1);
     for (int i = initialWordLen; i >= 0; i--)
@@ -35,7 +38,7 @@ char *GetWordMirror(char *initialWord) {
     return mirroredWord;
 }
 
-char *WordPuissance(char *initialWord, int puissance) {
+char* WordPuissance(char *initialWord, int puissance) {
     char *finalWord = malloc(strlen(initialWord)*puissance + 1);
     strcpy(finalWord, initialWord);
 
@@ -45,4 +48,9 @@ char *WordPuissance(char *initialWord, int puissance) {
     }
 
     return finalWord;
+}
+
+bool IsStringProducingFinishedWord(char *string) {
+    if (strstr(string, "+") == NULL & strstr(string, "*") == NULL) {return true;}
+    else {return false;}
 }
