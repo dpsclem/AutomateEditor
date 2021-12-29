@@ -1,7 +1,6 @@
 #include "main.h"
 
 int main() {
-    printf("%s", GetWordMirror("abcdef"));
     return 0;
 }
 
@@ -34,4 +33,16 @@ char *GetWordMirror(char *initialWord) {
     }
     
     return mirroredWord;
+}
+
+char *WordPuissance(char *initialWord, int puissance) {
+    char *finalWord = malloc(strlen(initialWord)*puissance + 1);
+    strcpy(finalWord, initialWord);
+
+    for (int i = 0; i < puissance-1; i++)
+    {
+        strcat(finalWord, initialWord);
+    }
+
+    return finalWord;
 }

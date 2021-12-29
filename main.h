@@ -12,3 +12,4 @@ char** readFileLines(char* path);
 char* ConcatWords(char *firstWord, char *secondWord);
 bool IsWordEmpty(char *wordToCheck);
 char *GetWordMirror(char *initialWord);
+char *WordPuissance(char *initialWord, int puissance);
