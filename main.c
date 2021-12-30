@@ -59,7 +59,6 @@ bool IsWordInAlphabet(char* word, char* alphabet) {
     {
         if (!strchr(alphabet, *currentChar)) {return false;}
         currentChar++;
-        printf("a");
     }
     return true;
 }
