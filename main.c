@@ -1,7 +1,6 @@
 #include "main.h"
 
 int main() {
-    
     return 0;
 }
 
@@ -54,6 +53,17 @@ bool IsStringProducingFinishedWord(char *string) {
     else {return false;}
 }
 
+bool IsWordInAlphabet(char* word, char* alphabet) {
+    char* currentChar = word;
+    while(*currentChar) 
+    {
+        if (!strchr(alphabet, *currentChar)) {return false;}
+        currentChar++;
+        printf("a");
+    }
+    return true;
+}
+
 char* loadAutomate(char* path){
     //ouvre le fichier
     FILE* import_file = fopen(path,"r"); //read only
@@ -83,7 +93,7 @@ char* loadAutomate(char* path){
     
     scanf("Appuyez sur entrée pour terminer...");
     //devrait retourner la struct AEF + path
-    return;
+    return "";
 }
 
 char* mainMenu(){
