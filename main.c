@@ -1,13 +1,8 @@
 #include "main.h"
 
 int main() {
-    mainMenu();
-    /*
-    printf("%d", IsStringProducingFinishedWord("a*bb"));
-    printf("\n");
-    printf("%d", IsStringProducingFinishedWord("aabcj"));
+    
     return 0;
-    */
 }
 
 char* ConcatWords(char *firstWord, char *secondWord){
@@ -42,6 +37,7 @@ char* GetWordMirror(char *initialWord) {
 }
 
 char* WordPuissance(char *initialWord, int puissance) {
+    if (puissance == 0) {return "";}
     char *finalWord = malloc(strlen(initialWord)*puissance + 1);
     strcpy(finalWord, initialWord);
 
