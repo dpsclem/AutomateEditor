@@ -13,4 +13,18 @@ char* ConcatWords(char *firstWord, char *secondWord);
 bool IsWordEmpty(char *wordToCheck);
 char* GetWordMirror(char *initialWord);
 char* WordPuissance(char *initialWord, int puissance);
+<<<<<<< Updated upstream
 bool IsStringProducingFinishedWord(char *string);
+=======
+bool IsStringProducingFinishedWord(char *string);
+char* mainMenu();
+char* loadAutomate(char* path);
+
+struct AEF{
+    char *alphabet;
+    char *etats;
+    char *etat_initial;
+    char *etat_final;
+    char ***tableau;
+};
+>>>>>>> Stashed changes
