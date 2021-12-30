@@ -1,13 +1,7 @@
 #include "main.h"
 
 int main() {
-    mainMenu();
-    /*
-    printf("%d", IsStringProducingFinishedWord("a*bb"));
-    printf("\n");
-    printf("%d", IsStringProducingFinishedWord("aabcj"));
     return 0;
-    */
 }
 
 char* ConcatWords(char *firstWord, char *secondWord){
@@ -42,6 +36,7 @@ char* GetWordMirror(char *initialWord) {
 }
 
 char* WordPuissance(char *initialWord, int puissance) {
+    if (puissance == 0) {return "";}
     char *finalWord = malloc(strlen(initialWord)*puissance + 1);
     strcpy(finalWord, initialWord);
 
@@ -56,6 +51,16 @@ char* WordPuissance(char *initialWord, int puissance) {
 bool IsStringProducingFinishedWord(char *string) {
     if (strstr(string, "+") == NULL & strstr(string, "*") == NULL) {return true;}
     else {return false;}
+}
+
+bool IsWordInAlphabet(char* word, char* alphabet) {
+    char* currentChar = word;
+    while(*currentChar) 
+    {
+        if (!strchr(alphabet, *currentChar)) {return false;}
+        currentChar++;
+    }
+    return true;
 }
 
 char* loadAutomate(char* path){
@@ -87,7 +92,7 @@ char* loadAutomate(char* path){
     
     scanf("Appuyez sur entrée pour terminer...");
     //devrait retourner la struct AEF + path
-    return;
+    return "";
 }
 
 char* mainMenu(){
