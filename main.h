@@ -14,3 +14,5 @@ bool IsWordEmpty(char *wordToCheck);
 char* GetWordMirror(char *initialWord);
 char* WordPuissance(char *initialWord, int puissance);
 bool IsStringProducingFinishedWord(char *string);
+char* mainMenu();
+char* loadAutomate(char* path);
