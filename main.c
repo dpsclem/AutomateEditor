@@ -136,4 +136,25 @@ void mainMenu(){
 void CreationMenu(){
     printf("Menu de création de l'automate\n");
 
+    //Initialisation d'une instance de struct
+
+    //Choix du nombre d'états de l'AEF
+    int stateNumber;
+    
+    
+    printf("Combien d'états souhaitez vous créer ?\n");
+    scanf("%i",stateNumber);
+
+
+    //Le nom des états est normalisé et s'écrit "e"+"numéro"
+
+    //Choix du nombre de lettres de l'alphabet
+    int lettersNumber;
+    printf("Combien d'états souhaitez vous créer ?\n");
+    scanf("%i",stateNumber);
+
+    
+
+    
+
 }
