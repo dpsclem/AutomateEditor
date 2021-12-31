@@ -15,7 +15,7 @@ char* GetWordMirror(char* initialWord);
 char* WordPuissance(char* initialWord, int puissance);
 bool IsStringProducingFinishedWord(char* string);
 bool IsWordInAlphabet(char* word, char* alphabet);
-char* mainMenu();
+void mainMenu();
 char* loadAutomate(char* path);
 
 struct AEF{
@@ -25,3 +25,4 @@ struct AEF{
     char *etat_final;
     char ***tableau;
 };
+

@@ -1,6 +1,7 @@
 #include "main.h"
 
 int main() {
+    mainMenu();
     return 0;
 }
 
@@ -95,14 +96,15 @@ char* loadAutomate(char* path){
     return "";
 }
 
-char* mainMenu(){
+void mainMenu(){
     
 
     //choix de l'action à réaliser
     int* act = malloc(sizeof(int) *2);
 
-    printf("Choisissez l'action à réaliser:\n- 0: Quitter le programme\n- 1: Importer un automate\n");
+    printf("Choisissez l'action à réaliser:\n- 0: Quitter le programme\n- 1: Importer un automate\n- 2: Créer un automate");
     scanf("%d",act);
+    
     if(act[0] == 0){
         printf("Le programme va fermer");
         exit(-1);
@@ -118,6 +120,10 @@ char* mainMenu(){
         
         //Sinon on applique la fonction de lecture caractère par caractère du fichier.
         loadAutomate(filename);
+    }else if(act[0] == 2){
+        //On lance le menu de création
+        CreationMenu();
+
     }else{
 
         printf("L'action choisie n'est pas reconnue. Le programme va fermer.\n");
@@ -127,3 +133,7 @@ char* mainMenu(){
 
 //Fonction pour créer l'AEF de toutes pièces
 //Est un choix dans le mainMenu
+void CreationMenu(){
+    printf("Menu de création de l'automate\n");
+
+}
