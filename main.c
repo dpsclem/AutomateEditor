@@ -70,7 +70,7 @@ char* WordPuissance(char *initialWord, int puissance) {
 }
 
 bool IsStringProducingFinishedWord(char *string) {
-    if (strstr(string, "+") == NULL & strstr(string, "*") == NULL) {return true;}
+    if ((strstr(string, "+") == NULL) & (strstr(string, "*") == NULL)) {return true;}
     else {return false;}
 }
 
@@ -189,34 +189,16 @@ void CreationMenu(){
     scanf("%d",&lettersQuantity);
     printf("%d letters were created.\n",lettersQuantity);
 
-    /*
-    Lien currentLink;
-    char nextRep = "o";
-    int i =0;
-    do
-    {
-        i +=1;
-        printf("Etat : e%d\n", i);
-        currentLink.etatActuel = i;
-        scanf("Avec quel etat souhaitez vous créer une liaison : %d", currentLink.etatLien);
-        scanf("Lettre de transition : %s", currentLink.lettreTransition);
-        aef.transitions = malloc(sizeof(currentLink));
-        scanf("Continuer ? o/n : %s", nextRep);
-
-    }
-    while (nextRep ="o");
-    */
-
     //Le nom des états est normalisé et s'écrit "e"+"numéro"
     //Ajoute directement dans la ligne etats de l'AEF les états générés
-    
+    /*
     char* states = malloc(statesQuantity*sizeof(char)+1);
     for(int i =0; i < statesQuantity; i++){
         states[i] = ("e%d",&i);
         //printf(states[i]);
     }
     aef.etats = states;
-    
+    */
 
     //Ajoute les lettres à l'alphabet;
     char* alphabet = malloc(lettersQuantity*sizeof(char)+1);
@@ -234,26 +216,84 @@ void CreationMenu(){
 
     printf("Do you want to add a final state ? (y/n)\n");
     char answer;
-    while(scanf("c") != "y" || scanf("c") != "n"){
+    scanf("%s",&answer);
+    while(answer != 'y' || answer != 'n'){
         printf("Do you want to add a final state ? (y/n)\n");
     }
     
-    if(scanf("c") == "y"){
+    if(answer == 'y'){
+        //On a dit qu'on souhaitait des états finaux
+        //demander le nombre d'états finaux
+        int finalStatesQuantity;
+        printf("How many final states do you want ?\n");
+        scanf("%d",&finalStatesQuantity);
 
+        //Ajout état(s) final(finaux)
+        char* finalStates = malloc(finalStatesQuantity*sizeof(char)+1);
+        //On print les différents états:
+        printf("States :\n");
+        for(int i = 0; i < statesQuantity; i++){
+            printf("%d\n",aef.etats[i]);
+        }
+        
+        /*
+        for(int i = 0; i < finalStatesQuantity; i++){
+            printf("Write the number of the state you want to be final.");
+            int state;
+            scanf("%d",&state);
+            //On vérifie que l'état n'existe pas dans final state
+            for(int j = 0; j < strlen(finalStates); j++){
+                if(finalStates[j]==state){
+                    printf("State is already designated as final");
+                }else{
+                    finalStates[i] = state;
+                }
+            }
+        }
+        */
+
+        int i = 0;
+        while(i < finalStatesQuantity){
+            printf("Write the number of the state you want to be final.");
+            int state;
+            scanf("%d",&state);
+            //On vérifie que l'état n'existe pas dans final state
+            for(unsigned j = 0; j < strlen(finalStates); j++){
+                if(finalStates[j]==state){
+                    printf("State is already designated as final");
+                    break;
+                }else{
+                    finalStates[i] = state;
+                    i+=1;
+                }
+            }
+        }
     } 
     
-    //demander le nombre d'états finaux
-    int finalStatesQuantity;
-    printf("How many final states do you want ?\n");
-    scanf("%d",&finalStatesQuantity);
-    //Ajout état(s) final(finaux)
+    
     
 
     //On display tout afin de permettre à l'utilisateur de vérifier si il ne s'est pas trompé.
 
-
+    //On va maintenant passer à la création des liaisons
     
+    /*
+    Lien currentLink;
+    char nextRep = "o";
+    int i =0;
+    do
+    {
+        i +=1;
+        printf("Etat : e%d\n", i);
+        currentLink.etatActuel = i;
+        scanf("Avec quel etat souhaitez vous créer une liaison : %d", currentLink.etatLien);
+        scanf("Lettre de transition : %s", currentLink.lettreTransition);
+        aef.transitions = malloc(sizeof(currentLink));
+        scanf("Continuer ? o/n : %s", nextRep);
 
+    }
+    while (nextRep ="o");
+    */
 
 }
 
