@@ -1,7 +1,27 @@
 #include "main.h"
+#define LINEMAX = 2
 
 int main() {
     mainMenu();
+    /*
+    int statesQuantity = 2;
+    Lien lien1;
+    lien1.etatActuel = "e1";
+    lien1.etatLien = "e3";
+    lien1.lettreTransition = "b";
+
+    Lien lien2;
+    lien2.etatActuel = "e1";
+    lien2.etatLien = "e3";
+    lien2.lettreTransition = "b";
+
+    Lien* matrice = calloc(statesQuantity,sizeof(Lien));
+    matrice[0] = lien1;
+    matrice[1] = lien2;
+    for (int i = 0; i < 2; i++) {
+        printf("%s %s %s\n", matrice[i].etatActuel, matrice[i].etatLien,  matrice[i].lettreTransition);
+    }
+    */
     return 0;
 }
 
@@ -69,7 +89,7 @@ char* loadAutomate(char* path){
     FILE* import_file = fopen(path,"r"); //read only
     //si fichier null, doit revenir au mainmenu
     if(import_file == NULL){
-            printf("Erreur, le fichier recherché n'existe pas\n");
+            printf("Reading error, file doesn't exist. Returning to main menu.\n");
             mainMenu();
     }
 
@@ -91,28 +111,26 @@ char* loadAutomate(char* path){
     
     fclose(import_file);
     
-    scanf("Appuyez sur entrée pour terminer...");
+    scanf("Tap ENTER to end.");
     //devrait retourner la struct AEF + path
     return "";
 }
 
 void mainMenu(){
-    
-
     //choix de l'action à réaliser
     int* act = malloc(sizeof(int) *2);
 
-    printf("Choisissez l'action à réaliser:\n- 0: Quitter le programme\n- 1: Importer un automate\n- 2: Créer un automate");
+    printf("Choose the action:\n- 0: End program\n- 1: Import automaton\n- 2: Create automaton\n");
     scanf("%d",act);
     
     if(act[0] == 0){
-        printf("Le programme va fermer");
+        printf("Program will close itself.");
         exit(-1);
     }else if(act[0] == 1){
         //256 caractères max : limite de windows
         char filename[256];
 
-        printf("Donnez le répertoire+nom du fichier que vous souhaitez traiter\n");
+        printf("Input the path + extension to the file you wan't to import.\n");
         scanf("%s",filename);
 
         //debug
@@ -126,35 +144,118 @@ void mainMenu(){
 
     }else{
 
-        printf("L'action choisie n'est pas reconnue. Le programme va fermer.\n");
+        printf("Chosen action was not recognized. Please specify a correct action.\n");
+        mainMenu();
     }
 }
-
 
 //Fonction pour créer l'AEF de toutes pièces
 //Est un choix dans le mainMenu
 void CreationMenu(){
-    printf("Menu de création de l'automate\n");
+    printf("-Automaton creation menu-\n");
 
     //Initialisation d'une instance de struct
+    AEF aef;
 
     //Choix du nombre d'états de l'AEF
-    int stateNumber;
+    int statesQuantity;
+    printf("How many states do you wan't ? (Integer only)\n");
     
+    //On va récupérer le int nombre d'états
+    scanf("%d",&statesQuantity);
+    //vérification que bien un int et pas autre chose.
+   
+
+    /*
+    char *p, buf[2];
+    do{
+        if(!fgets(buf, sizeof buf, stdin))
+        break;
+
+        //On enlève \n
+        buf[strcspn(buf,"\n")] = 0;
+        statesQuantity = strtol(buf, &p,10);
+    }while (p != buf + strlen(buf));
+    */
+
+    //On peut display les états créés
+    printf("%d states were created\n",statesQuantity);
     
-    printf("Combien d'états souhaitez vous créer ?\n");
-    scanf("%i",stateNumber);
 
-
-    //Le nom des états est normalisé et s'écrit "e"+"numéro"
 
     //Choix du nombre de lettres de l'alphabet
-    int lettersNumber;
-    printf("Combien d'états souhaitez vous créer ?\n");
-    scanf("%i",stateNumber);
+    int lettersQuantity;
+    printf("\nHow many letters in your alphabet ? (Integer only)\n");
+    scanf("%d",&lettersQuantity);
+    printf("%d letters were created.\n",lettersQuantity);
+
+    /*
+    Lien currentLink;
+    char nextRep = "o";
+    int i =0;
+    do
+    {
+        i +=1;
+        printf("Etat : e%d\n", i);
+        currentLink.etatActuel = i;
+        scanf("Avec quel etat souhaitez vous créer une liaison : %d", currentLink.etatLien);
+        scanf("Lettre de transition : %s", currentLink.lettreTransition);
+        aef.transitions = malloc(sizeof(currentLink));
+        scanf("Continuer ? o/n : %s", nextRep);
+
+    }
+    while (nextRep ="o");
+    */
+
+    //Le nom des états est normalisé et s'écrit "e"+"numéro"
+    //Ajoute directement dans la ligne etats de l'AEF les états générés
+    
+    char* states = malloc(statesQuantity*sizeof(char)+1);
+    for(int i =0; i < statesQuantity; i++){
+        states[i] = ("e%d",&i);
+        //printf(states[i]);
+    }
+    aef.etats = states;
+    
+
+    //Ajoute les lettres à l'alphabet;
+    char* alphabet = malloc(lettersQuantity*sizeof(char)+1);
+    for(int i = 0; i < lettersQuantity; i++){
+        printf("Input the symbol for letter %d. (Only 1 character)\n",i);
+        scanf("%s",&alphabet[i]);
+        //alphabet[i] = i + 61;
+    }
+    //Et peuple l'alphabet de l'AEF
+    aef.alphabet = alphabet;
+
+    //Ajout état initial
+    printf("What state is the initial state ?\n");
+    scanf("%s", aef.etat_initial);
+
+    printf("Do you want to add a final state ? (y/n)\n");
+    char answer;
+    while(scanf("c") != "y" || scanf("c") != "n"){
+        printf("Do you want to add a final state ? (y/n)\n");
+    }
+    
+    if(scanf("c") == "y"){
+
+    } 
+    
+    //demander le nombre d'états finaux
+    int finalStatesQuantity;
+    printf("How many final states do you want ?\n");
+    scanf("%d",&finalStatesQuantity);
+    //Ajout état(s) final(finaux)
+    
+
+    //On display tout afin de permettre à l'utilisateur de vérifier si il ne s'est pas trompé.
+
 
     
 
-    
 
 }
+
+
+

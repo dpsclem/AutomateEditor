@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -16,13 +17,23 @@ char* WordPuissance(char* initialWord, int puissance);
 bool IsStringProducingFinishedWord(char* string);
 bool IsWordInAlphabet(char* word, char* alphabet);
 void mainMenu();
+void CreationMenu();
 char* loadAutomate(char* path);
+
+
+struct Lien{
+    int etatActuel;
+    int etatLien;
+    char lettreTransition;
+};
+typedef struct Lien Lien;
 
 struct AEF{
     char *alphabet;
     char *etats;
     char *etat_initial;
     char *etat_final;
-    char ***tableau;
+    Lien* transitions;
 };
+typedef struct AEF AEF;
 
