@@ -123,3 +123,7 @@ char* mainMenu(){
         printf("L'action choisie n'est pas reconnue. Le programme va fermer.\n");
     }
 }
+
+
+//Fonction pour créer l'AEF de toutes pièces
+//Est un choix dans le mainMenu

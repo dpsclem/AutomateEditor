@@ -17,3 +17,11 @@ bool IsStringProducingFinishedWord(char* string);
 bool IsWordInAlphabet(char* word, char* alphabet);
 char* mainMenu();
 char* loadAutomate(char* path);
+
+struct AEF{
+    char *alphabet;
+    char *etats;
+    char *etat_initial;
+    char *etat_final;
+    char ***tableau;
+};
