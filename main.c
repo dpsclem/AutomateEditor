@@ -251,6 +251,7 @@ void CreationMenu(){
             }
         }
         */
+       
 
         int i = 0;
         while(i < finalStatesQuantity){
